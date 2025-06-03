@@ -92,6 +92,9 @@ def main():
                 continue
 
             token = input("enter your token to send a message: ").strip()
+            if not validate_token(token):
+                print("token was invalid or already used. can't send.")
+                continue
             if is_token_frozen(token):
                 print("this token has been frozen. you can't send anything.")
                 continue
@@ -119,6 +122,7 @@ def main():
             }
 
             save_data(data)
+            use_token(token)
             log_event("Sender", "MessageSent")
             print("encrypted message saved successfully.")
 
